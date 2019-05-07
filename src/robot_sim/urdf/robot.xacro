@@ -6,7 +6,7 @@
     <pose>0 0 0.1 0 0 0</pose>
 
     <inertial>
-      <mass value="1.0"/>
+      <mass value="10.0"/>
       <origin xyz="0.0 0 0.1" rpy=" 0 0 0"/>
       <inertia
           ixx="1.0" ixy="0" ixz="0"
@@ -14,7 +14,6 @@
           izz="1.0"
       />
     </inertial>
-
     <collision name='collision'>
       <geometry>
         <box size=".4 .2 .1"/>
@@ -24,7 +23,7 @@
     <visual name='chassis_visual'>
       <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <geometry>
-        <box size=".4 .2 .1"/>
+        <mesh filename="package://robot_sim/urdf/WheelChair.stl" scale="0.01 0.01 0.01"/>
       </geometry>
     </visual>
 
@@ -46,6 +45,7 @@
       </surface>
     </collision>
 
+
     <visual name='caster_visual'>
       <origin xyz="-0.15 0 -0.05" rpy=" 0 0 0"/>
       <geometry>
@@ -56,18 +56,21 @@
 
 
   <link name="left_wheel">
+
     <collision name="collision">
       <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
       <geometry>
         <cylinder radius="0.1" length="0.05"/>
       </geometry>
     </collision>
+
     <visual name="left_wheel_visual">
       <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
       <geometry>
         <cylinder radius="0.1" length="0.05"/>
       </geometry>
     </visual>
+
     <inertial>
       <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
       <mass value="0.5"/>
@@ -80,6 +83,7 @@
   </link>
 
   <link name="right_wheel">
+
     <collision name="collision">
       <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
       <geometry>
@@ -92,6 +96,7 @@
         <cylinder radius="0.1" length="0.05"/>
       </geometry>
     </visual>
+
     <inertial>
       <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
       <mass value="0.5"/>
@@ -112,6 +117,8 @@
     <limit effort="100" velocity="100"/>
     <joint_properties damping="0.0" friction="0.0"/>
   </joint>
+
+
 
   <joint type="continuous" name="right_wheel_hinge">
     <origin xyz="0.1 -0.15 0" rpy="0 0 0"/>
