@@ -3,11 +3,11 @@
 <robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <link name='chassis'>
-    <pose>0 0 0.1 0 0 0</pose>
+    <pose>0 0 0.201784 0 0 0</pose>
 
     <inertial>
       <mass value="10.0"/>
-      <origin xyz="0.0 0 0.1" rpy=" 0 0 0"/>
+      <origin xyz="0 0 0.201784" rpy=" 0 0 0"/>
       <inertia
           ixx="1.0" ixy="0" ixz="0"
           iyy="1.0" iyz="0"
@@ -16,22 +16,36 @@
     </inertial>
     <collision name='collision'>
       <geometry>
-        <box size=".4 .2 .1"/>
+        <box size="0.406054 0.406054 0.10"/>
       </geometry>
     </collision>
 
-    <visual name='chassis_visual'>
-      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+    <visual name='chair'>
+      <origin xyz="0 0 0" rpy="0 0 -3.14"/>
       <geometry>
-        <mesh filename="package://robot_sim/urdf/WheelChair.stl" scale="0.01 0.01 0.01"/>
+         <!-- <box size="0.40 0.35  0.1"/>  -->
+        <mesh filename="package://robot_sim/meshes/wheelchair_chasis.stl" scale="0.01 0.01 0.01"/>
       </geometry>
     </visual>
-
-
-    <collision name='caster_collision'>
-      <origin xyz="-0.15 0 -0.05" rpy=" 0 0 0"/>
+    <!--
+    <visual name='os1'>
+      <origin xyz="0 0 0.40605" rpy=" 0 0 0"/>
       <geometry>
-        <sphere radius="0.05"/>
+        <box size="0.016 0.016 0.40605"/>
+      </geometry>
+    </visual>
+    <visual name='osnova.001'>
+      <origin xyz="0.217474 0.159666 0.166384" rpy="1.5707 0 1.5707"/>
+      <geometry>
+        <box size="0.015709 0.015709 0.310168"/>
+      </geometry>
+    </visual>
+-->
+   <!--
+    <collision name='caster_collision'>
+      <origin xyz="0.406054 0 0.201784" rpy=" 0 0 0"/>
+      <geometry>
+        <sphere radius="0.201784"/>
       </geometry>
       <surface>
         <friction>
@@ -47,11 +61,11 @@
 
 
     <visual name='caster_visual'>
-      <origin xyz="-0.15 0 -0.05" rpy=" 0 0 0"/>
+      <origin xyz="0.406054/2 0 0.201784" rpy=" 0 0 0"/>
       <geometry>
-        <sphere radius="0.05"/>
+        <sphere radius="0.201784"/>
       </geometry>
-    </visual>
+    </visual>-->
   </link>
 
 
@@ -60,21 +74,23 @@
     <collision name="collision">
       <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
       <geometry>
-        <cylinder radius="0.1" length="0.05"/>
+         <cylinder radius="0.201784" length="0.0356884"/>
+
       </geometry>
     </collision>
 
     <visual name="left_wheel_visual">
       <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
       <geometry>
-        <cylinder radius="0.1" length="0.05"/>
+        <mesh filename="package://robot_sim/meshes/wheelchair_wheel.stl" scale="0.01 0.01 0.01"/>
+        <!-- <cylinder radius="0.201784" length="0.0356884"/> -->
       </geometry>
     </visual>
 
     <inertial>
-      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <origin xyz="0 0 0.201784" rpy="0 1.5707 1.5707"/>
       <mass value="0.5"/>
-      <cylinder_inertia m="0.5" r="0.1" h="0.05"/>
+      <cylinder_inertia m="0.5" r="0.201784" h="0.0356884"/>
       <inertia
         ixx="0.1" ixy="0.0" ixz="0.0"
         iyy="0.1" iyz="0.0"
@@ -85,22 +101,24 @@
   <link name="right_wheel">
 
     <collision name="collision">
-      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <origin xyz="0 0 0" rpy="0 1.5707 -1.5707"/>
       <geometry>
-        <cylinder radius="0.1" length="0.05"/>
-      </geometry>
+        <cylinder radius="0.201784" length="0.0356884"/>
+
+    </geometry>
     </collision>
     <visual name="right_wheel_visual">
-      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <origin xyz="0 0 0" rpy="0 1.5707 -1.5707"/>
       <geometry>
-        <cylinder radius="0.1" length="0.05"/>
+          <!-- <cylinder radius="0.201784" length="0.0356884"/> -->
+        <mesh filename="package://robot_sim/meshes/wheelchair_wheel.stl" scale="0.01 0.01 0.01"/>
       </geometry>
     </visual>
 
     <inertial>
-      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <origin xyz="0 0 0.201784" rpy="0 1.5707 1.5707"/>
       <mass value="0.5"/>
-      <cylinder_inertia m="0.5" r="0.1" h="0.05"/>
+      <cylinder_inertia m="0.5" r="0.201784" h="0.0356884"/>
       <inertia
         ixx="0.1" ixy="0.0" ixz="0.0"
         iyy="0.1" iyz="0.0"
@@ -110,7 +128,7 @@
 
 
   <joint type="continuous" name="left_wheel_hinge">
-    <origin xyz="0.1 0.15 0" rpy="0 0 0"/>
+    <origin xyz="0 0.19 0.201784" rpy="0 0 0"/>
     <child link="left_wheel"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
@@ -121,7 +139,7 @@
 
 
   <joint type="continuous" name="right_wheel_hinge">
-    <origin xyz="0.1 -0.15 0" rpy="0 0 0"/>
+    <origin xyz="0 -0.19 0.201784" rpy="0 0 0"/>
     <child link="right_wheel"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
