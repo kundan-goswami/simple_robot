@@ -59,16 +59,16 @@
   <!--
   <chassis name="base" xyz="0 0 ${main_wheel_radius}" rpy="0 0 0" m="2" chassisLength="0.01" chassisWidth="${2*main_wheel_radius}" chassisHeight="0.01"/>
 -->
-  <chassis name="os" xyz="${main_wheel_radius} 0.01 0.01" rpy="0 0 0" m="2" chassisLength="${2*main_wheel_radius}" chassisWidth="0.01" chassisHeight="0.01"/>
+  <chassis name="os" xyz="${3/4*main_wheel_radius} 0.01 0.01" rpy="0 0 0" m="2" chassisLength="${3/2*main_wheel_radius}" chassisWidth="0.01" chassisHeight="0.01"/>
   <link_joint parent="base_chassis" child ="os_chassis" xyz="0 0 ${main_wheel_radius}" rpy="0 0 0" />
 
-  <chassis name="os1" xyz="${main_wheel_radius} 0 0" rpy="0 0 0" m="2" chassisLength="0.01" chassisWidth="${2*main_wheel_radius - 0.2}" chassisHeight="0.01"/>
-  <link_joint parent="os_chassis" child ="os1_chassis" xyz="${main_wheel_radius} 0 0" rpy="0 0 0" />
+  <chassis name="os1" xyz="${3/4*main_wheel_radius} 0 0" rpy="0 0 0" m="2" chassisLength="0.01" chassisWidth="${2*main_wheel_radius - 0.2}" chassisHeight="0.01"/>
+  <link_joint parent="os_chassis" child ="os1_chassis" xyz="${3/4*main_wheel_radius} 0 0" rpy="0 0 0" />
 
-  <chassis name="os2" xyz="0 0 ${-main_wheel_radius/2}" rpy="0 0 0" m="2" chassisLength="0.01" chassisWidth="0.01" chassisHeight="${main_wheel_radius}"/>
-  <link_joint parent="os1_chassis" child ="os2_chassis" xyz="${main_wheel_radius} ${main_wheel_radius/2} 0" rpy="0 0 0" />
-  <chassis name="os3" xyz="0 0 ${-main_wheel_radius/2}" rpy="0 0 0" m="2" chassisLength="0.01" chassisWidth="0.01" chassisHeight="${main_wheel_radius}"/>
-  <link_joint parent="os1_chassis" child ="os3_chassis" xyz="${main_wheel_radius} ${-main_wheel_radius/2} 0" rpy="0 0 0" />
+  <chassis name="os2" xyz="0 0 ${-main_wheel_radius/4}" rpy="0 0 0" m="2" chassisLength="0.01" chassisWidth="0.01" chassisHeight="${main_wheel_radius/2}"/>
+  <link_joint parent="os1_chassis" child ="os2_chassis" xyz="${3/4*main_wheel_radius} ${main_wheel_radius/2} 0" rpy="0 0 0" />
+  <chassis name="os3" xyz="0 0 ${-main_wheel_radius/4}" rpy="0 0 0" m="2" chassisLength="0.01" chassisWidth="0.01" chassisHeight="${main_wheel_radius/2}"/>
+  <link_joint parent="os1_chassis" child ="os3_chassis" xyz="${3/4*main_wheel_radius} ${-main_wheel_radius/2} 0" rpy="0 0 0" />
 
 
 
@@ -77,23 +77,27 @@
   <wheel  lr="r" tY="0.02" xyz=" 0 0 ${main_wheel_radius}" rpy="${pi/2} 0 0" wheelWidth="${main_wheel_length}" wheelRadius="${main_wheel_radius}" wheelMass="${main_wheel_weight}" meshFile="wheelchair_wheel"/>
   <wheel_joint parent="base_chassis" child ="r_wheel" xyz="0 ${-main_wheel_radius} 0" rpy="0 0 0" />
 
-  <wheel  lr="lf" tY="0.001" xyz=" 0 0 0" rpy="${pi/2} 0 0" wheelWidth="${small_wheel_length}" wheelRadius="${small_wheel_radius}" wheelMass="${small_wheel_weight}" meshFile="wheelchair_wheel_front"/>
-  <wheel_joint parent="os2_chassis" child ="lf_wheel" xyz="${small_wheel_radius} ${small_wheel_radius} -${small_wheel_radius}" rpy="0 0 0" />
+  <wheel  lr="lf" tY="0.001" xyz=" 0 0 ${small_wheel_radius}" rpy="${pi/2} 0 0" wheelWidth="${small_wheel_length}" wheelRadius="${small_wheel_radius}" wheelMass="${small_wheel_weight}" meshFile="wheelchair_wheel_front"/>
+  <wheel_joint parent="os2_chassis" child ="lf_wheel" xyz="0 ${-main_wheel_radius} ${-main_wheel_radius}" rpy="0 0 0" />
+
+  <wheel  lr="lr" tY="0.001" xyz=" 0 0 ${small_wheel_radius}" rpy="${pi/2} 0 0" wheelWidth="${small_wheel_length}" wheelRadius="${small_wheel_radius}" wheelMass="${small_wheel_weight}" meshFile="wheelchair_wheel_front"/>
+  <wheel_joint parent="os3_chassis" child ="lr_wheel" xyz="0 ${main_wheel_radius} ${-main_wheel_radius}" rpy="0 0 0" />
+
 
   <gazebo>
     <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
       <legacyMode>false</legacyMode>
       <alwaysOn>true</alwaysOn>
       <updateRate>20</updateRate>
-      <leftJoint>left_wheel_hinge</leftJoint>
-      <rightJoint>right_wheel_hinge</rightJoint>
-      <wheelSeparation>0.4</wheelSeparation>
-      <wheelDiameter>0.1</wheelDiameter>
+      <leftJoint>base_chassis_l_wheel_joint</leftJoint>
+      <rightJoint>base_chassis_r_wheel_joint</rightJoint>
+      <wheelSeparation>2*main_wheel_radius</wheelSeparation>
+      <wheelDiameter>2*main_wheel_radius</wheelDiameter>
       <torque>20</torque>
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
-      <robotBaseFrame>chassis</robotBaseFrame>
+      <robotBaseFrame>base_chassis</robotBaseFrame>
     </plugin>
   </gazebo>
 
