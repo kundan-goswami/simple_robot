@@ -59,7 +59,7 @@
         </geometry>
       </visual>
       <inertial name="${lr}_wheel_visual_intertial">
-        <origin xyz="0 0 0" rpy="0 ${pi/2} ${pi/2}" />
+        <origin xyz="${xyz}" rpy="0 ${pi/2} ${pi/2}" />
         <mass value="${wheelMass}"/>
         <cylinder_inertia m="${wheelMass}" r="${wheelRadius}" h="${wheelWidth}"/>
       </inertial>
