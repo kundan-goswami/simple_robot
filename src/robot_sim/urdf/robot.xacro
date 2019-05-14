@@ -62,7 +62,7 @@
   <chassis name="os" xyz="${3/4*main_wheel_radius} 0.01 0.01" rpy="0 0 0" m="2" chassisLength="${3/2*main_wheel_radius}" chassisWidth="0.01" chassisHeight="0.01"/>
   <link_joint parent="base_chassis" child ="os_chassis" xyz="0 0 ${main_wheel_radius}" rpy="0 0 0" />
 
-  <chassis name="os1" xyz="${3/4*main_wheel_radius} 0 " rpy="0 0 0" m="2" chassisLength="0.01" chassisWidth="${2*main_wheel_radius - 0.2}" chassisHeight="0.01"/>
+  <chassis name="os1" xyz="${3/4*main_wheel_radius} 0 ${main_wheel_radius}" rpy="0 0 0" m="2" chassisLength="0.01" chassisWidth="${2*main_wheel_radius - 0.2}" chassisHeight="0.01"/>
   <link_joint parent="os_chassis" child ="os1_chassis" xyz="${3/4*main_wheel_radius} 0 0" rpy="0 0 0" />
 
   <chassis name="os2" xyz="0 0 ${-main_wheel_radius/4}" rpy="0 0 0" m="2" chassisLength="0.01" chassisWidth="0.01" chassisHeight="${main_wheel_radius/2}"/>
