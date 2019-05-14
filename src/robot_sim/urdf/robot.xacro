@@ -62,7 +62,7 @@
   <chassis name="os" xyz="${3/4*main_wheel_radius} 0.01 0.01" rpy="0 0 0" m="2" chassisLength="${3/2*main_wheel_radius}" chassisWidth="0.01" chassisHeight="0.01"/>
   <link_joint parent="base_chassis" child ="os_chassis" xyz="0 0 ${main_wheel_radius}" rpy="0 0 0" />
 
-  <chassis name="os1" xyz="${3/4*main_wheel_radius} 0 0" rpy="0 0 0" m="2" chassisLength="0.01" chassisWidth="${2*main_wheel_radius - 0.2}" chassisHeight="0.01"/>
+  <chassis name="os1" xyz="${3/4*main_wheel_radius} 0 " rpy="0 0 0" m="2" chassisLength="0.01" chassisWidth="${2*main_wheel_radius - 0.2}" chassisHeight="0.01"/>
   <link_joint parent="os_chassis" child ="os1_chassis" xyz="${3/4*main_wheel_radius} 0 0" rpy="0 0 0" />
 
   <chassis name="os2" xyz="0 0 ${-main_wheel_radius/4}" rpy="0 0 0" m="2" chassisLength="0.01" chassisWidth="0.01" chassisHeight="${main_wheel_radius/2}"/>
@@ -72,16 +72,16 @@
 
 
 
-  <wheel  lr="l" tY="0.02" xyz=" 0 0 0" rpy="${-pi/2} 0 0" wheelWidth="${main_wheel_length}" wheelRadius="${main_wheel_radius}" wheelMass="${main_wheel_weight}" meshFile="wheelchair_wheel"/>
+  <wheel  lr="l" tY="0.02" xyz=" 0 0 ${main_wheel_radius}" rpy="${-pi/2} 0 0" wheelWidth="${main_wheel_length}" wheelRadius="${main_wheel_radius}" wheelMass="${main_wheel_weight}" meshFile="wheelchair_wheel"/>
   <wheel_joint parent="base_chassis" child ="l_wheel" xyz="0 ${main_wheel_radius} ${main_wheel_radius}" rpy="0 0 0" />
   <wheel  lr="r" tY="0.02" xyz=" 0 0 ${main_wheel_radius}" rpy="${pi/2} 0 0" wheelWidth="${main_wheel_length}" wheelRadius="${main_wheel_radius}" wheelMass="${main_wheel_weight}" meshFile="wheelchair_wheel"/>
   <wheel_joint parent="base_chassis" child ="r_wheel" xyz="0 ${-main_wheel_radius} ${main_wheel_radius}" rpy="0 0 0" />
 
   <wheel  lr="lf" tY="0.001" xyz=" 0 0 ${small_wheel_radius}" rpy="${pi/2} 0 0" wheelWidth="${small_wheel_length}" wheelRadius="${small_wheel_radius}" wheelMass="${small_wheel_weight}" meshFile="wheelchair_wheel_front"/>
-  <wheel_joint parent="os2_chassis" child ="lf_wheel" xyz="0 ${-main_wheel_radius} ${-main_wheel_radius}" rpy="0 0 0" />
+  <wheel_joint parent="os2_chassis" child ="lf_wheel" xyz="0 ${-main_wheel_radius} ${small_wheel_radius}" rpy="0 0 0" />
 
   <wheel  lr="lr" tY="0.001" xyz=" 0 0 ${small_wheel_radius}" rpy="${pi/2} 0 0" wheelWidth="${small_wheel_length}" wheelRadius="${small_wheel_radius}" wheelMass="${small_wheel_weight}" meshFile="wheelchair_wheel_front"/>
-  <wheel_joint parent="os3_chassis" child ="lr_wheel" xyz="0 ${main_wheel_radius} ${-main_wheel_radius}" rpy="0 0 0" />
+  <wheel_joint parent="os3_chassis" child ="lr_wheel" xyz="0 ${main_wheel_radius} ${small_wheel_radius}" rpy="0 0 0" />
 
 
   <gazebo>
